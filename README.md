@@ -28,6 +28,45 @@ The CMake build provides the `json_to_schema` library target and the
 `json_to_schema::json_to_schema` alias. Tests can be disabled with
 `-DBUILD_TESTING=OFF`.
 
+### Install with CMake
+
+Build before installing. For example, in Windows PowerShell:
+
+```powershell
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX="$env:LOCALAPPDATA\Programs\json-to-schema"
+cmake --build build --config Release
+cmake --install build --config Release
+```
+
+New Windows build directories default to `%LOCALAPPDATA%\Programs\json-to-schema`
+when `LOCALAPPDATA` is available, avoiding administrator privileges. Explicit
+prefixes are preserved. Existing build directories retain their cached prefix;
+the configure command above replaces an old `C:\Program Files\json_to_schema`
+prefix.
+
+On Linux and macOS, use a user-local prefix without `sudo`:
+
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/.local"
+cmake --build build --config Release
+cmake --install build --config Release
+```
+
+New Linux and macOS build directories default to `$HOME/.local` when `HOME` is
+available. The explicit prefix above also updates existing builds that cached
+`/usr/local`. Add the installed CLI to your shell's `PATH`:
+
+```sh
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+To keep this setting, add it to your shell startup file (for example, `~/.bashrc`
+or `~/.zshrc`). If the platform's user-directory environment variable is missing
+or empty, CMake retains its standard prefix; specify a writable prefix explicitly.
+
+To override the destination for one installation without changing the cache, use
+`cmake --install build --config Release --prefix "<writable-directory>"`.
+
 ## CLI
 
 The `json-to-schema` command accepts a JSON value as one quoted command-line

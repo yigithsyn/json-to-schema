@@ -5,16 +5,31 @@ file(READ "${CMAKE_CURRENT_SOURCE_DIR}/VERSION" PROJECT_VERSION)
 string(STRIP "${PROJECT_VERSION}" PROJECT_VERSION)
 
 project(json_to_schema
-    VERSION ${PROJECT_VERSION}
-    DESCRIPTION "Allocation-free JSON to JSON Schema converter for C"
-    LANGUAGES C
+VERSION ${PROJECT_VERSION}
+DESCRIPTION "Allocation-free JSON to JSON Schema converter for C"
+LANGUAGES C
 )
+
+
+# project() initializes the prefix, so only replace CMake's default.
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    if(WIN32 AND DEFINED ENV{LOCALAPPDATA} AND NOT "$ENV{LOCALAPPDATA}" STREQUAL "")
+        file(TO_CMAKE_PATH "$ENV{LOCALAPPDATA}/Programs/json-to-schema" _default_install_prefix)
+    elseif(UNIX AND DEFINED ENV{HOME} AND NOT "$ENV{HOME}" STREQUAL "")
+        set(_default_install_prefix "$ENV{HOME}/.local")
+    endif()
+    if(DEFINED _default_install_prefix)
+        set(CMAKE_INSTALL_PREFIX "${_default_install_prefix}" CACHE PATH
+            "Install prefix for json-to-schema" FORCE)
+        unset(_default_install_prefix)
+    endif()
+endif()
 
 include(GNUInstallDirs)
 
 add_library(json_to_schema
-    src/jsmn.c
-    src/json_schema.c
+src/jsmn.c
+src/json_schema.c
 )
 add_library(json_to_schema::json_to_schema ALIAS json_to_schema)
 
