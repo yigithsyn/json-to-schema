@@ -1,12 +1,13 @@
 CC ?= cc
 CFLAGS ?= -O2
 CPPFLAGS ?= -Iinclude
+PYTHON ?= python
 
 SOURCES = src/jsmn.c src/json_schema.c
 TEST_BINARY = build/test_json_schema
 CLI_BINARY = build/json-to-schema
 
-.PHONY: all cli test clean
+.PHONY: all cli test clean docs docs-serve
 
 all: cli test
 
@@ -27,6 +28,12 @@ test: $(TEST_BINARY) $(CLI_BINARY)
 	./$(CLI_BINARY) -h >/dev/null
 	./$(CLI_BINARY) --help >/dev/null
 	./$(CLI_BINARY) --version >/dev/null
+
+docs:
+	$(PYTHON) -m mkdocs build --strict
+
+docs-serve:
+	$(PYTHON) -m mkdocs serve
 
 clean:
 	rm -rf build

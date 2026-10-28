@@ -1,0 +1,21 @@
+site_name: json-to-schema
+site_description: Allocation-free JSON Schema inference in portable C
+site_url: https://yigithsyn.github.io/json-to-schema/
+repo_url: https://github.com/yigithsyn/json-to-schema
+repo_name: yigithsyn/json-to-schema
+
+docs_dir: docs/public
+
+theme:
+  name: readthedocs
+
+nav:
+  - Overview: index.md
+  - Build and test: getting-started.md
+  - C API: api.md
+  - Command-line interface: cli.md
+  - Inference behavior: inference.md
+  - CMake integration: cmake-integration.md
+  - Documentation: documentation.md
+
+strict: true

@@ -87,3 +87,26 @@ nesting are limited to 64 levels.
   corresponding JSON Schema types.
 * String formats and semantic constraints are not inferred from a single
   example.
+
+## Documentation
+
+The MkDocs guide covers building, the C API, CLI usage, inference rules, and
+CMake integration. Its Markdown sources are in [docs/public](docs/public/index.md).
+The configured website is <https://yigithsyn.github.io/json-to-schema/>; it
+requires an initial successful GitHub Pages deployment.
+
+To build or preview the guide locally:
+
+```sh
+python -m pip install -r requirements-docs.txt
+python -m mkdocs build --strict
+python -m mkdocs serve
+```
+
+The generated site is written to `site/`. The Makefile also provides `make docs`
+and `make docs-serve`. Documentation dependencies are separate from the C build.
+
+See the [documentation guide](docs/public/documentation.md) for environment
+setup, GitHub Pages activation, and Read the Docs hosting. The Documentation
+workflow checks documentation pull requests and deploys documentation changes
+on `main` after Pages is configured to use **GitHub Actions**.
