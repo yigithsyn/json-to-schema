@@ -62,6 +62,7 @@ else
     } > "$tmp" && mv -- "$tmp" CHANGELOG.md
     git add CHANGELOG.md
     git commit -m "Update CHANGELOG for v$VERSION"
+    git push origin HEAD
     git tag "v$VERSION"
     git push origin "v$VERSION"
     gh release create "v$VERSION" --notes "$CHANGELOG"
