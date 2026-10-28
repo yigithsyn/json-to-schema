@@ -42,12 +42,14 @@ actual C API and CLI.
 
 The Documentation workflow:
 
-1. Builds the site strictly for documentation pull requests and pushes to `main`.
+1. Builds the site strictly for documentation pull requests and each `main` push
+   through the CI workflow.
 2. Uploads the generated site as a Pages artifact.
 3. Deploys only on pushes to `main` or manual runs on `main`.
 
 The workflow also supports `workflow_call` for reuse by another workflow.
-Pull requests build the documentation but do not deploy it.
+Pull requests build the documentation but do not deploy it. The CI workflow
+reuses this check and deploys documentation independently of release builds.
 
 To enable hosting, a repository administrator must select **GitHub Actions**
 under **Settings > Pages > Build and deployment > Source**. Commit and push the
@@ -58,6 +60,22 @@ The configured site address is
 <https://yigithsyn.github.io/json-to-schema/>. It becomes available only after
 Pages has been enabled and a deployment succeeds. Change `site_url` in
 `mkdocs.yml` if the hosting address changes.
+
+## Releases
+
+The CI workflow checks the version in `CMakeLists.txt` on pushes to `main`.
+When it differs from the latest release tag, it moves notes from the
+`[Unreleased]` section of `CHANGELOG.md` into a dated release entry, creates an
+annotated `v<version>` tag, and starts cross-platform build and test jobs. The
+same jobs also run for manually pushed `v*` tags, which must match the CMake
+project version.
+
+The Release workflow packages the library, public headers, and CLI as ZIP files
+on Linux, Windows, and macOS, then attaches them to a GitHub Release using that
+tag's changelog entry. Bump `project(VERSION ...)` in `CMakeLists.txt` and add
+release notes under `[Unreleased]` to publish a new version. Release
+preparation behavior is covered by `node --test
+tests/test_release_workflow.cjs`.
 
 ## Read the Docs
 
