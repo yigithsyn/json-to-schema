@@ -52,6 +52,16 @@ if [[ "$DRY_RUN" == true ]]; then
     echo "Dry run: would generate release notes:"
     echo "$CHANGELOG"
 else
+    # Update CHANGELOG.md with the new version and release notes before tagging and pushing.
+    line=5
+    tmp=$(mktemp CHANGELOG.md.XXXXXX) || exit 1
+    {
+        head -n "$((line - 1))" -- CHANGELOG.md
+        printf '## [v%s] - %s\n%s\n\n' "$VERSION" "$(date +%Y-%m-%d)" "$CHANGELOG"
+        tail -n "+$line" -- CHANGELOG.md
+    } > "$tmp" && mv -- "$tmp" CHANGELOG.md
+    git add CHANGELOG.md
+    git commit -m "Update CHANGELOG for v$VERSION"
     git tag "v$VERSION"
     git push origin "v$VERSION"
     gh release create "v$VERSION" --notes "$CHANGELOG"
