@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
+# Read version from VERSION file
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/VERSION" PROJECT_VERSION)
+string(STRIP "${PROJECT_VERSION}" PROJECT_VERSION)
+
 project(json_to_schema
-    VERSION 0.1.0
+    VERSION ${PROJECT_VERSION}
     DESCRIPTION "Allocation-free JSON to JSON Schema converter for C"
     LANGUAGES C
 )

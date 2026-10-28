@@ -12,7 +12,7 @@ isolated environment:
 ```powershell
 python -m venv .venv-docs
 .\.venv-docs\Scripts\Activate.ps1
-python -m pip install -r requirements-docs.txt
+python -m pip install -r docs/requirements.txt
 ```
 
 In a Unix-like shell, activate the environment with

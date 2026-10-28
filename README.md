@@ -98,7 +98,7 @@ requires an initial successful GitHub Pages deployment.
 To build or preview the guide locally:
 
 ```sh
-python -m pip install -r requirements-docs.txt
+python -m pip install -r docs/requirements.txt
 python -m mkdocs build --strict
 python -m mkdocs serve
 ```
