@@ -2,6 +2,10 @@
 
 Notable changes are recorded here for each release.
 
+## [v0.1.2] - 2026-10-28
+- chore: update installation instructions and improve CMake configuration
+- chore: push changes to origin after updating CHANGELOG
+
 ## [v0.1.1] - 2026-10-28
 - chore: update CHANGELOG format and remove unused test file
 - chore: remove CI/CD workflows and update documentation structure
