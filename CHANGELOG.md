@@ -2,6 +2,9 @@
 
 Notable changes are recorded here for each release.
 
+## [v0.1.6] - 2026-10-29
+- feat: update CI workflow to improve binary handling and naming conventions
+
 ## [v0.1.5] - 2026-10-29
 
 
