@@ -2,6 +2,9 @@
 
 Notable changes are recorded here for each release.
 
+## [v0.1.5] - 2026-10-29
+
+
 ## [v0.1.4] - 2026-10-29
 - feat: enhance CI workflow to include release packaging and uploading
 - feat: add CI workflow for building and testing across multiple OS
