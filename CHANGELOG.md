@@ -2,6 +2,9 @@
 
 Notable changes are recorded here for each release.
 
+## [v0.1.9] - 2026-10-29
+- feat: add Emscripten setup and WASM distribution build for Linux release
+
 ## [v0.1.8] - 2026-10-29
 
 
