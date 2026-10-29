@@ -21,15 +21,15 @@ jobs:
           - os: ubuntu-latest
             name: linux
             binary-path: build/ci/json-to-schema
-            binary-name: json-to-schema
+            binary-name: json-to-schema-linux
           - os: macos-latest
             name: macos
             binary-path: build/ci/json-to-schema
-            binary-name: json-to-schema
+            binary-name: json-to-schema-macos
           - os: windows-latest
             name: windows
             binary-path: build/ci/Release/json-to-schema.exe
-            binary-name: json-to-schema.exe
+            binary-name: json-to-schema-windows.exe
 
     steps:
       - name: Check out repository
