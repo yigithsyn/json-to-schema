@@ -59,12 +59,12 @@ jobs:
         if: github.event_name == 'release' && matrix.name == 'linux'
         run: |
           emcc -O2 -std=c89 -Iinclude \
-            src/jsmn.c src/json_schema.c src/json_to_schema_cli.c \
+            src/jsmn.c src/json_schema.c \
             -o release-assets/json-to-schema-wasm.js \
+            --no-entry \
             -s ALLOW_MEMORY_GROWTH=1 \
-            -s EXIT_RUNTIME=1
-          output=$(node release-assets/json-to-schema-wasm.js '{"name":"Ada"}')
-          echo "$output" | grep -F '"name"'
+            -s EXPORTED_FUNCTIONS='["_jts_json_to_schema","_malloc","_free"]'
+          node -e 'const wasm = require("./release-assets/json-to-schema-wasm.js"); if (typeof wasm._jts_json_to_schema !== "function") throw new Error("jts_json_to_schema was not exported");'
 
       - name: Upload release binary
         if: github.event_name == 'release'
