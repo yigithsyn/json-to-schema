@@ -2,6 +2,11 @@
 
 Notable changes are recorded here for each release.
 
+## [v0.1.4] - 2026-10-29
+- feat: enhance CI workflow to include release packaging and uploading
+- feat: add CI workflow for building and testing across multiple OS
+- chore: remove GitHub Pages and Releases sections from documentation
+
 ## [v0.1.3] - 2026-10-28
 - bump version to v0.1.2 and update CHANGELOG commit process
 
