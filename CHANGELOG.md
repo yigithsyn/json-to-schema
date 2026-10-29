@@ -2,6 +2,9 @@
 
 Notable changes are recorded here for each release.
 
+## [v0.1.11] - 2026-10-29
+
+
 ## [v0.1.10] - 2026-10-29
 
 

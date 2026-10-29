@@ -62,9 +62,11 @@ jobs:
             src/jsmn.c src/json_schema.c \
             -o release-assets/json-to-schema-wasm.js \
             --no-entry \
+            -s MODULARIZE=1 \
+            -s EXPORT_NAME=createJsonToSchema \
             -s ALLOW_MEMORY_GROWTH=1 \
             -s EXPORTED_FUNCTIONS='["_jts_json_to_schema","_malloc","_free"]'
-          node -e 'const wasm = require("./release-assets/json-to-schema-wasm.js"); if (typeof wasm._jts_json_to_schema !== "function") throw new Error("jts_json_to_schema was not exported");'
+          node -e 'require("./release-assets/json-to-schema-wasm.js")().then(wasm => { if (typeof wasm._jts_json_to_schema !== "function") throw new Error("jts_json_to_schema was not exported"); }).catch(error => { console.error(error); process.exitCode = 1; });'
 
       - name: Upload release binary
         if: github.event_name == 'release'
